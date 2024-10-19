@@ -10,7 +10,7 @@ func main() {
 
 func mainTypes() {
 	// basic types: integer, float, complex, bool, string
-	// aggregate types: array, map, struct
+	// aggregate types: array, slice, map, struct
 
 	// ======== Числовой тип ==========
 	// целые числа
