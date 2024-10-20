@@ -1,0 +1,718 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>theory: Go Coverage Report</title>
+		<style>
+			body {
+				background: black;
+				color: rgb(80, 80, 80);
+			}
+			body, pre, #legend span {
+				font-family: Menlo, monospace;
+				font-weight: bold;
+			}
+			#topbar {
+				background: black;
+				position: fixed;
+				top: 0; left: 0; right: 0;
+				height: 42px;
+				border-bottom: 1px solid rgb(80, 80, 80);
+			}
+			#content {
+				margin-top: 50px;
+			}
+			#nav, #legend {
+				float: left;
+				margin-left: 10px;
+			}
+			#legend {
+				margin-top: 12px;
+			}
+			#nav {
+				margin-top: 10px;
+			}
+			#legend span {
+				margin: 0 5px;
+			}
+			.cov0 { color: rgb(192, 0, 0) }
+.cov1 { color: rgb(128, 128, 128) }
+.cov2 { color: rgb(116, 140, 131) }
+.cov3 { color: rgb(104, 152, 134) }
+.cov4 { color: rgb(92, 164, 137) }
+.cov5 { color: rgb(80, 176, 140) }
+.cov6 { color: rgb(68, 188, 143) }
+.cov7 { color: rgb(56, 200, 146) }
+.cov8 { color: rgb(44, 212, 149) }
+.cov9 { color: rgb(32, 224, 152) }
+.cov10 { color: rgb(20, 236, 155) }
+
+		</style>
+	</head>
+	<body>
+		<div id="topbar">
+			<div id="nav">
+				<select id="files">
+				
+				<option value="file0">go-playground/theory/00-hw.go (0.0%)</option>
+				
+				<option value="file1">go-playground/theory/01-variables.go (0.0%)</option>
+				
+				<option value="file2">go-playground/theory/02-types.go (0.0%)</option>
+				
+				<option value="file3">go-playground/theory/03-strings.go (0.0%)</option>
+				
+				<option value="file4">go-playground/theory/04-aggregations.go (0.0%)</option>
+				
+				<option value="file5">go-playground/theory/05-functions.go (0.0%)</option>
+				
+				<option value="file6">go-playground/theory/06-conditions.go (13.5%)</option>
+				
+				<option value="file7">go-playground/theory/07-cycles.go (0.0%)</option>
+				
+				</select>
+			</div>
+			<div id="legend">
+				<span>not tracked</span>
+			
+				<span class="cov0">not covered</span>
+				<span class="cov8">covered</span>
+			
+			</div>
+		</div>
+		<div id="content">
+		
+		<pre class="file" id="file0" style="display: none">package theory
+
+func helloWorld() <span class="cov0" title="0">{
+        print("Hello, World!")
+}</span>
+</pre>
+		
+		<pre class="file" id="file1" style="display: none">package theory
+
+import "fmt"
+
+func mainVariables() <span class="cov0" title="0">{
+        // ========== Переменные ===========
+        var v1 int // 0, zero values are 0, "", false
+        var v2 int = 2 // 100
+        v3 := 3 // var v3 int = 5
+        fmt.Println(v1, v2, v3) // 0, 2, 3
+        
+        v1 = 10
+        v2, v3 = 30, 20
+        fmt.Println(v1, v2, v3) // 10, 30, 20
+
+        v2, v3 = v3, v2 // =, т.к. переменные существуют
+        fmt.Println(v1, v2, v3) // 10, 20, 30
+        
+        v1, v2, v3, v4 := 100, 200, 300, 400 // :=, т.к. v4 объявляется впервые
+        fmt.Println(v1, v2, v3, v4)
+
+        // блочное создание
+        var (
+                v01 = 1
+                v02 = "string"
+                v03 = false
+                someIgnoredVariable = 12345
+        )
+        _ = someIgnoredVariable // игнорирование переменной
+        fmt.Println("block:", v01, v02, v03)
+        fmt.Println()
+
+        // ========== Константы ===========
+        const secondsInDay = 60 * 60 * 24
+        fmt.Println("Seconds in day:", secondsInDay)
+
+        const (
+                minuteInSeconds = 60
+                hourInMinutes = 60
+                dayInHours = 24
+        )
+        fmt.Println("Seconds in day:", minuteInSeconds * hourInMinutes * dayInHours)
+        fmt.Println()
+
+        // ============ Указатели =============
+        x := 123
+        ptr := &amp;x // получить указателя на адрес блока памяти
+        fmt.Println(ptr, "points to", *ptr)
+
+        xCopy := x // переприсваивание
+        ptrxCopy := &amp;xCopy
+        fmt.Println(ptrxCopy)
+
+        xCopyByPtr := *ptr // присваивание по значению указателя
+        ptrxCopyByPtr := &amp;xCopyByPtr
+        fmt.Println(ptrxCopyByPtr)
+
+        // ptr &lt;&gt; ptrxCopy &lt;&gt; ptrxCopyByPtr
+}</span>
+</pre>
+		
+		<pre class="file" id="file2" style="display: none">package theory
+
+import "fmt"
+
+func mainTypes() <span class="cov0" title="0">{
+        // basic types: integer, float, complex, bool, string
+        // aggregate types: array, slice, map, struct
+
+        // ======== Числовой тип ==========
+        // целые числа
+        const signedInt8Bot int8 = -128
+        const signedInt8Top int8 = 127 // math.Pow(2, 8 - 1) - 1
+        fmt.Println("Значения в диапазоне [-128, 127]")
+
+        // целые беззнаковые числа
+        const unsignedInt8Bot uint8 = 0
+        const unsignedInt8Top uint8 = 255 // math.Pow(2, 8) - 1
+        fmt.Println("Значения в диапазоне [0, 255]", unsignedInt8Top)
+
+        // переполнение uint
+        var overflowedUint uint = 1 // uint32/uint64 (в зависимости от арх-ры процессора)
+        overflowedUint -= 2
+        fmt.Println(overflowedUint) // 18446744073709551615
+
+        // byte == uint8 - байты
+        // rune == int32 - символы юникод
+        // см. 03-strings.go
+
+        // с плавающей точкой ~8 знаков
+        fmt.Println(float32(1) / 7) // 0.14285715
+        
+        // с плавающей точкой ~17 знаков
+        fmt.Println(float64(1) / 7) // 0.14285714285714285
+
+        var buggedFloat32 float32 = 16_777_216 // опасное float32
+        fmt.Println(buggedFloat32 == buggedFloat32 + 1) // true
+
+        // комплексные числа
+        var compl1 complex64;
+        var compl2 complex128;
+        _, _ = compl1, compl2
+
+
+        // ======== Логический тип ==========
+        trueNotFalse := !false
+        trueAnd := true &amp;&amp; 10 &gt; 1 
+        trueOr := true || false 
+        fmt.Println(trueNotFalse, trueAnd, trueOr)
+
+        fmt.Println("0 is", _intToBool(0))
+        fmt.Println("5 is", _intToBool(5))
+}</span>
+
+func _intToBool(i int) bool <span class="cov0" title="0">{
+        if i != 0 </span><span class="cov0" title="0">{
+                return true
+        }</span>
+        <span class="cov0" title="0">return false</span>
+}
+</pre>
+		
+		<pre class="file" id="file3" style="display: none">package theory
+
+import "fmt"
+
+func mainStrings() <span class="cov0" title="0">{
+        // Immutables!
+
+        var (
+                renderedStr = "wow\tcool\n" // ""
+                nonRenderedStr = `wow\tcool\n` // ``
+        )
+        fmt.Println("Renders:", renderedStr)
+        fmt.Println("Not renders:", nonRenderedStr)
+
+        // ''
+        var b byte = 'r' // 1 byte ASCII
+        var r rune = '你' // 3 byte UTF
+        fmt.Println(b, r)
+
+        twoBytesStr := "ю" // кодируется двумя байтами
+        fmt.Println(twoBytesStr[0]) // 209
+        fmt.Println(twoBytesStr[1]) // 142
+        fmt.Println(len(twoBytesStr)) // 2
+
+        var someStr string = "абвгд"
+        fmt.Println(len(someStr)) // 10
+        fmt.Println(someStr[:4]) // аб
+        fmt.Println(someStr[4:]) // вгд
+        
+        // concat
+        fmt.Println(someStr[:3] + someStr[3:]) // а? + ?вгд = абвгд
+        
+        // сравнение
+        fmt.Println("aб" &lt; "ав") // true, лексикографический, как в словаре
+
+        someText := "какой-то текст."
+        some := someText[:15]
+        text := someText[16:26]
+        fmt.Println(some)
+        fmt.Println(text)
+        // len(someText) - количество бит. someText[len(someText)] -&gt; panic
+}</span>
+</pre>
+		
+		<pre class="file" id="file4" style="display: none">package theory
+
+import "fmt"
+
+func mainAggregations() <span class="cov0" title="0">{
+        mainArrays()
+        mainSlices()
+        mainMaps()
+        mainStructs()
+}</span>
+
+func mainArrays() <span class="cov0" title="0">{
+        // ========= Массивы ===========
+        fmt.Println("========= Массивы ===========")
+        // Имеют фиксированную длину
+        var arr1 [5]int
+        fmt.Println(arr1) // [0 0 0 0 0]
+
+        // объявление
+        var arr2 [3]int = [3]int{1,2,3} // излишняя форма
+        var arr3 = [3]int{1,2,3} // полная форма
+        arr4 := [3]int{1,2,3} // краткая форма
+        fmt.Println(arr2, arr3, arr4)
+
+        // размер массива исходя из кол-ва элементов в объявлении
+        arr5 := [...]int{1,2}
+        fmt.Println("Элементов в массиве:", len(arr5)) // 2
+}</span>
+
+func mainSlices() <span class="cov0" title="0">{
+        // ========== Слайсы, массивы динамического размера ============
+        fmt.Println("========= Слайсы, срезы =========")
+
+        // Имеют переменную длину, элементы одного типа
+        someSlice := []int{10,20,30,40,50}
+        newSlice := someSlice[2:4]
+        fmt.Println(newSlice) // 30, 40
+        fmt.Println(len(newSlice)) // 2 - количество элементов
+        fmt.Println(cap(newSlice)) // 3 - capacity, ёмкость, кол-во под которое выделена память
+
+        // Создание среза - make 
+        newSlice = make([]int, 1, 2)
+        _printSliceInfo(newSlice) // len=1, cap=2, arr=[0]
+
+        newSlice = append(newSlice, 2)
+        _printSliceInfo(newSlice) // len=2, cap=2, arr=[0 2]
+
+        // как только len &gt; cap, создаётся новый массив (cap * 2), значения копируются
+        newSlice = append(newSlice, 3)
+        _printSliceInfo(newSlice) // len=3, cap=4, arr=[0 2 3]
+}</span>
+
+func _printSliceInfo(sl []int) <span class="cov0" title="0">{
+        fmt.Printf("len=%d, cap=%d, arr=%v\n", len(sl), cap(sl), sl)
+}</span>
+
+func mainMaps() <span class="cov0" title="0">{
+        // ========= Maps (хэш-таблицы) ============
+        // Все ключи должны быть сравниваемыми, без коллизий (float не подойдёт)
+        fmt.Println("========= Maps =========")
+
+        // Инициализация
+        m1 := make(map[int]int) // map[]
+        _ = m1
+
+        // map[тип ключа]тип значения
+        var m2 map[int]bool
+        fmt.Println(m2)
+
+        ages := map[string]uint16 {
+                "Гена": 30,
+                "Вася": 1,
+        }
+        fmt.Println(ages) // map[Вася:1 Гена:30 Илья:52]
+
+        ages["Илья"] = 52 // create
+
+        fmt.Println(ages["Илья"]) // read
+
+        ages["Илья"]++ // update
+        fmt.Println(ages["Илья"])
+}</span>
+
+func mainStructs() <span class="cov0" title="0">{
+        // ============ Структуры ============
+        fmt.Println("========= Структуры =========")
+
+        // объявление структуры
+        type Point struct {
+                x int
+                y int
+        }
+
+        p1 := Point{x: 1, y: 2} // {1 2}
+        fmt.Println(p1)
+
+        p2 := Point{3, 4} // {3, 4}
+        p2 = Point{3, 5} // {3, 5}
+        p2.x = 30
+        fmt.Println(p2) // {30, 5}
+}</span>
+</pre>
+		
+		<pre class="file" id="file5" style="display: none">package theory
+
+import (
+        "fmt"
+        "strings"
+)
+
+func mainFunctions() <span class="cov0" title="0">{
+        mainFuncs()
+        mainRecursion()
+        mainLambdas()
+        mainClosures()
+        mainDefer()
+}</span>
+
+func mainFuncs() <span class="cov0" title="0">{
+        // =========== Функции ============
+        fmt.Println("======= Функции =========")
+
+        fmt.Println(_returnTyped() == _returnNamed()) // true
+        
+        fmt.Println(_variativeFuncArray(1, []int{2, 3, 4})) // [2 3 4 1]
+        fmt.Println(_variativeFunc(1, 2, 3, 4)) // [2 3 4 1]
+        fmt.Println(_variativeFunc(1, []int{2, 3, 4}...)) // распаковка слайса при передаче! [2 3 4 1]
+
+        newStr, err := _addSuffixWithErr("someStr")
+        fmt.Println(newStr) // someStrSuffix
+        fmt.Println(err) // &lt;nil&gt;
+}</span>
+
+func _returnTyped() int <span class="cov0" title="0">{
+        // результат по типу
+        lol := 123
+        return lol
+}</span>
+
+func _returnNamed() (lol int) <span class="cov0" title="0">{
+        // именованное возвращение результата
+        lol = 123
+        return
+}</span>
+
+func _variativeFuncArray(item int, listSlice []int) (newSlice []int) <span class="cov0" title="0">{
+        // принимает элемент и список
+        newSlice = append(listSlice, item)
+        return
+}</span>
+
+func _variativeFunc(item int, listSlice ...int) (newSlice []int) <span class="cov0" title="0">{
+        // принимает элементы, запаковывает их
+        newSlice = append(listSlice, item)
+        return
+}</span>
+
+func _addSuffixWithErr(origin string) (string, error) <span class="cov0" title="0">{
+        // возвращает строку с суффиксом и отсутствие ошибок
+        newOrigin := origin + "Suffix"
+        return newOrigin, nil
+}</span>
+
+func mainRecursion() <span class="cov0" title="0">{
+        // Рекурсия
+        fmt.Println("=========== Рекурсия ==============")
+        recursionResult := _recursionFactorial(5) // рекурсия для получения факториала
+        fmt.Println(recursionResult)
+}</span>
+
+func _recursionFactorial(n uint) uint <span class="cov0" title="0">{
+        // функция по нахождению факториала числа через рекурсию
+        if n &lt;= 1 </span><span class="cov0" title="0">{
+                return 1
+        }</span>
+        <span class="cov0" title="0">return n * _recursionFactorial(n - 1)</span>
+}
+
+func mainLambdas() <span class="cov0" title="0">{
+        fmt.Println("=========== Анонимные функции (lambda) ==============")
+        // анонимные функции f := func () { ... }
+        // func(r rune) rune { return r + 1 }
+        lambdaResult := strings.Map(func(r rune) rune </span><span class="cov0" title="0">{ return r + 1 }</span>, "SDWS")
+        <span class="cov0" title="0">fmt.Println(lambdaResult)
+
+        // присваивание анонимной функции (моветон, по идее?)
+        var f1, f2 func(s string) int
+
+        f1 = func(s string) int </span><span class="cov0" title="0">{ return len(s) }</span>
+        <span class="cov0" title="0">f2 = func(s string) int </span><span class="cov0" title="0">{ return len(s) + 50 }</span>
+
+        <span class="cov0" title="0">fmt.Println(f1("ss"), f2("ss"))</span> // 2, 52
+}
+
+func mainClosures() <span class="cov0" title="0">{
+        // Замыкания
+        fmt.Println("=========== Замыкания (closure) ==============")
+        // замыкание (closure) без передачи значений
+        closed_func_1 := _counterClosure()
+        closed_func_1()
+        closed_func_1()
+
+        // замыкание (closure) с передачей значений
+        closedSumFunc1 := _parametrizedSumClosure(1)
+        closedSumFunc1(2)
+        resSum1 := closedSumFunc1(3)
+        fmt.Println("first:", resSum1) // first: 6
+
+        closedSumFunc2 := _parametrizedSumClosure(10)
+        closedSumFunc2(15)
+        resSum2 := closedSumFunc2(16)
+        fmt.Println("second:", resSum2) // second: 41
+}</span>
+
+func _counterClosure() func() <span class="cov0" title="0">{
+        counter := 0
+        return func () </span><span class="cov0" title="0">{
+                counter += 1
+                fmt.Println("Печатаю", counter)
+        }</span>
+}
+
+func _parametrizedSumClosure(start int) func(int) int <span class="cov0" title="0">{
+        return func (summand int) int </span><span class="cov0" title="0">{
+                start += summand
+                return start
+        }</span>
+}
+
+func mainDefer () <span class="cov0" title="0">{
+        // Defer выполняется при закрытии функции
+        fmt.Println("=========== Отложенный вызов (Defer) ==============")
+        // если defer несколько - пойдут с конца
+        // при передаче ptr - значение актуальное
+        // при передаче значения - значение не обновляется
+        i := 14
+        defer _teardownValue(i) // закроется вторым
+        defer _teardownPointer(&amp;i) // закроется первым
+        i++
+        fmt.Println("Still working. i is", i)
+        // Still working. i is 15
+        // pointer closed, i is 15
+        // value closed, i is 14
+
+        var num int
+        defer func(x int) </span><span class="cov0" title="0">{
+                fmt.Println(x)
+        }</span>(num)
+        <span class="cov0" title="0">num = 20</span>
+        // 0 (num уже вычислен для defer)
+}
+
+func _teardownValue (i int) <span class="cov0" title="0">{
+        fmt.Println("value closed, i is", i)
+}</span>
+
+func _teardownPointer (i *int) <span class="cov0" title="0">{
+        fmt.Println("pointer closed, i is", *i)
+}</span>
+
+</pre>
+		
+		<pre class="file" id="file6" style="display: none">package theory
+
+import (
+        "fmt"
+        "strconv"
+)
+
+func mainConditions () <span class="cov0" title="0">{
+        mainConditionIf()
+        mainConditionSwitch()
+}</span>
+
+func mainConditionIf () <span class="cov0" title="0">{
+        fmt.Println("============ if-elif-else ===========")
+        // if-elif-else
+        fmt.Println(_zeroChecker(-1), _zeroChecker(0), _zeroChecker(1))
+
+        // Declaration in condition
+        if x:= "kek"; x == "kek" </span><span class="cov0" title="0">{fmt.Println("yep, it's kek")}</span>
+
+        // Declaration in condition (multiple conditions checker)
+        <span class="cov0" title="0">fmt.Println(_returningBlocks())</span>
+}
+
+func _zeroChecker (i int) string <span class="cov0" title="0">{
+        if i &lt; 0 </span><span class="cov0" title="0">{
+                return "less"
+        }</span> else<span class="cov0" title="0"> if i &gt; 0 </span><span class="cov0" title="0">{
+                return "more"
+        }</span> else<span class="cov0" title="0"> {
+                return "equal"
+        }</span>
+}
+
+func _returningBlocks () string <span class="cov0" title="0">{
+        const (
+                MINIMAL_ONLINE = 100
+                MAX_TIMEOUT = 10.0
+        )
+        
+        _getCurrentOnline := func () int </span><span class="cov0" title="0">{ return 1000 }</span>
+        <span class="cov0" title="0">_getCurrentTimeout := func () float64 </span><span class="cov0" title="0">{ return 1.12 }</span>
+
+        <span class="cov0" title="0">if currentOnline := _getCurrentOnline(); currentOnline &lt; MINIMAL_ONLINE </span><span class="cov0" title="0">{
+                return "Слишком маленький онлайн: " + strconv.Itoa(currentOnline)
+        }</span> else<span class="cov0" title="0"> if currentTimeout := _getCurrentTimeout(); currentTimeout &gt; MAX_TIMEOUT </span><span class="cov0" title="0">{
+                return "Слишком большой таймаут запросов: " + fmt.Sprintf("%f", currentTimeout)
+        }</span> else<span class="cov0" title="0"> {
+                return "Всё ок"
+        }</span>
+}
+
+func mainConditionSwitch () <span class="cov0" title="0">{
+        fmt.Println("============ Switch-Case ===========")
+        // switch по значению
+        switchByValue(1)
+        switchByValue(3)
+
+        // switch по условию
+        fmt.Println(switchByCondition(-1))
+        fmt.Println(switchByCondition(0))
+        fmt.Println(switchByCondition(1))
+}</span>
+
+func switchByValue (value int) <span class="cov0" title="0">{
+        switch value </span>{
+        case 1:<span class="cov0" title="0">
+                value += 100
+                fmt.Println("case 1:", value)</span>
+        default:<span class="cov0" title="0">
+                fmt.Println("no such case")</span>
+        }
+}
+
+func switchByCondition (i int) (res string) <span class="cov8" title="1">{
+        switch </span>{
+        case i &lt; 0:<span class="cov8" title="1">
+                res = "less"</span>
+        case i &gt; 0:<span class="cov8" title="1">
+                res = "more"</span>
+        case i == 0:<span class="cov8" title="1">
+                res = "equal"</span>
+        }
+        <span class="cov8" title="1">return</span>
+}
+</pre>
+		
+		<pre class="file" id="file7" style="display: none">package theory
+
+import "fmt"
+
+func mainCycles () <span class="cov0" title="0">{
+        mainInfiniteLoop()
+        mainConditionLoop()
+        mainParametrizedLoop()
+        mainRangedLoop()
+        mainStrIterating()
+}</span>
+
+const ITERS_COUNT = 3
+
+func mainInfiniteLoop () <span class="cov0" title="0">{
+        fmt.Println("===== InfiniteLoop =======")
+        i := 0
+        for </span><span class="cov0" title="0">{
+                fmt.Println("Итерация:", i)
+                i++
+                if i == ITERS_COUNT </span><span class="cov0" title="0">{break</span>}
+        }
+}
+
+func mainConditionLoop () <span class="cov0" title="0">{
+        fmt.Println("===== ConditionLoop =======")
+        i := 0
+        for i &lt; ITERS_COUNT </span><span class="cov0" title="0">{
+                fmt.Println("Итерация:", i)
+                i++
+        }</span>
+}
+
+func mainParametrizedLoop () <span class="cov0" title="0">{
+        fmt.Println("===== ParametrizedLoop =======")
+        for i := 0; i &lt; ITERS_COUNT; i++ </span><span class="cov0" title="0">{
+                fmt.Println("Итерация:", i)
+        }</span>
+}
+
+func mainRangedLoop () <span class="cov0" title="0">{
+        fmt.Println("===== RangedLoop =======")
+        for i := range ITERS_COUNT </span><span class="cov0" title="0">{
+                fmt.Println("Итерация:", i)
+        }</span>
+
+        // range by slice
+        <span class="cov0" title="0">sl := []int{5,10,15}
+        for i, value := range sl </span><span class="cov0" title="0">{
+                fmt.Printf("In slice: key %v value %v\n", i, value)
+        }</span>
+
+        // range by map
+        <span class="cov0" title="0">dict := map[int]int {
+                5: 100,
+                6: 600,
+                7: 52,
+        }
+        for key, value := range dict </span><span class="cov0" title="0">{
+                fmt.Printf("In map: key %v value %v\n", key, value)
+        }</span>
+}
+
+func mainStrIterating() <span class="cov0" title="0">{
+        // Два способа итерирования по строке (байты и символы)
+        fmt.Println("===== Strings Iterating =======")
+        str := "Кот"
+
+        // parametrized by string (index 0,1,2,3,4,5; value type uint8=byte)
+        fmt.Println("By parametrized (by bytes):")
+        for i := 0; i &lt; len(str); i++ </span><span class="cov0" title="0">{
+                fmt.Printf("index=%v, value=%v, type=%T\n", i, str[i], str[i])
+        }</span>
+
+        // range by string (index 0,2,4; values type int32=rune)
+        <span class="cov0" title="0">fmt.Println("By range (by symbols):")
+        for idx, value := range str </span><span class="cov0" title="0">{
+                fmt.Printf("index=%v, value=%v, type=%T\n", idx, value, value)
+        }</span>
+}</pre>
+		
+		</div>
+	</body>
+	<script>
+	(function() {
+		var files = document.getElementById('files');
+		var visible;
+		files.addEventListener('change', onChange, false);
+		function select(part) {
+			if (visible)
+				visible.style.display = 'none';
+			visible = document.getElementById(part);
+			if (!visible)
+				return;
+			files.value = part;
+			visible.style.display = 'block';
+			location.hash = part;
+		}
+		function onChange() {
+			select(files.value);
+			window.scrollTo(0, 0);
+		}
+		if (location.hash != "") {
+			select(location.hash.substr(1));
+		}
+		if (!visible) {
+			select("file0");
+		}
+	})();
+	</script>
+</html>
