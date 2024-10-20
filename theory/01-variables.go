@@ -1,4 +1,4 @@
-package main
+package theory
 
 import "fmt"
 
@@ -56,8 +56,4 @@ func mainVariables() {
 	fmt.Println(ptrxCopyByPtr)
 
 	// ptr <> ptrxCopy <> ptrxCopyByPtr
-}
-
-func main() {
-	mainVariables()
 }

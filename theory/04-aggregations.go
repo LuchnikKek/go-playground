@@ -1,8 +1,8 @@
-package main
+package theory
 
 import "fmt"
 
-func main() {
+func mainAggregations() {
 	mainArrays()
 	mainSlices()
 	mainMaps()

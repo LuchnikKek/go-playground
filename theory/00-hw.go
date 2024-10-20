@@ -1,9 +1,5 @@
-package main
+package theory
 
 func helloWorld() {
 	print("Hello, World!")
-}
-
-func main() {
-	helloWorld()
 }
