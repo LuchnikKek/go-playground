@@ -1,11 +1,11 @@
-package main
+package theory
 
 import (
 	"fmt"
 	"strconv"
 )
 
-func main () {
+func mainConditions () {
 	mainConditionIf()
 	mainConditionSwitch()
 }

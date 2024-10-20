@@ -1,11 +1,11 @@
-package main
+package theory
 
 import (
 	"fmt"
 	"strings"
 )
 
-func main() {
+func mainFunctions() {
 	mainFuncs()
 	mainRecursion()
 	mainLambdas()

@@ -1,10 +1,6 @@
-package main
+package theory
 
 import "fmt"
-
-func main() {
-	mainStrings()
-}
 
 func mainStrings() {
 	// Immutables!

@@ -1,12 +1,6 @@
-package main
+package theory
 
-import (
-	"fmt"
-)
-
-func main() {
-	mainTypes()
-}
+import "fmt"
 
 func mainTypes() {
 	// basic types: integer, float, complex, bool, string
@@ -49,7 +43,7 @@ func mainTypes() {
 
 	// ======== Логический тип ==========
 	trueNotFalse := !false
-	trueAnd := true && true 
+	trueAnd := true && 10 > 1 
 	trueOr := true || false 
 	fmt.Println(trueNotFalse, trueAnd, trueOr)
 
