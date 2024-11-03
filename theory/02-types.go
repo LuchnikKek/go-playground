@@ -10,11 +10,13 @@ func MainTypes() {
 	// целые числа
 	const signedInt8Bot int8 = -128
 	const signedInt8Top int8 = 127 // math.Pow(2, 8 - 1) - 1
+	_, _ = signedInt8Bot, signedInt8Top
 	fmt.Println("Значения в диапазоне [-128, 127]")
 
 	// целые беззнаковые числа
 	const unsignedInt8Bot uint8 = 0
 	const unsignedInt8Top uint8 = 255 // math.Pow(2, 8) - 1
+	_ = unsignedInt8Bot
 	fmt.Println("Значения в диапазоне [0, 255]", unsignedInt8Top)
 
 	// переполнение uint
@@ -52,8 +54,5 @@ func MainTypes() {
 }
 
 func _intToBool(i int) bool {
-	if i != 0 {
-		return true
-	}
-	return false
+	return i != 0
 }
