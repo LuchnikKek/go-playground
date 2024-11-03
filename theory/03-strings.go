@@ -2,7 +2,7 @@ package theory
 
 import "fmt"
 
-func mainStrings() {
+func MainStrings() {
 	// Immutables!
 
 	var (

@@ -2,7 +2,7 @@ package theory
 
 import "fmt"
 
-func mainVariables() {
+func MainVariables() {
 	// ========== Переменные ===========
 	var v1 int // 0, zero values are 0, "", false
 	var v2 int = 2 // 100

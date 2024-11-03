@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-func mainFunctions() {
+func MainFunctions() {
 	mainFuncs()
 	mainRecursion()
 	mainLambdas()

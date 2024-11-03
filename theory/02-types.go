@@ -2,7 +2,7 @@ package theory
 
 import "fmt"
 
-func mainTypes() {
+func MainTypes() {
 	// basic types: integer, float, complex, bool, string
 	// aggregate types: array, slice, map, struct
 

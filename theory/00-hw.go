@@ -1,5 +1,5 @@
 package theory
 
-func helloWorld() {
+func HelloWorld() {
 	print("Hello, World!")
 }

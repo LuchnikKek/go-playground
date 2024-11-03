@@ -5,7 +5,7 @@ import (
 	"strconv"
 )
 
-func mainConditions () {
+func MainConditions () {
 	mainConditionIf()
 	mainConditionSwitch()
 }

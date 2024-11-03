@@ -2,7 +2,7 @@ package theory
 
 import "fmt"
 
-func mainCycles () {
+func MainCycles () {
 	mainInfiniteLoop()
 	mainConditionLoop()
 	mainParametrizedLoop()

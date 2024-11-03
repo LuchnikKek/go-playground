@@ -2,7 +2,7 @@ package theory
 
 import "fmt"
 
-func mainAggregations() {
+func MainAggregations() {
 	mainArrays()
 	mainSlices()
 	mainMaps()
