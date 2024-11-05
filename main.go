@@ -4,5 +4,5 @@ import "go-playground/theory"
 
 
 func main() {
-	theory.MainStructEmbedding()
+	theory.MainInterfacesEmpty()
 }
