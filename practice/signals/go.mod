@@ -1,0 +1,3 @@
+module practice/signals
+
+go 1.23.2
