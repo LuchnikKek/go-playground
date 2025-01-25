@@ -65,8 +65,8 @@ func _listener(ch, quit <-chan int) {
 		case <-quit:
 			fmt.Println("quit")
 			return
-		default: // спасает от deadlock
-			fmt.Println("default") // будет спамить, мб нужен просто слип
+		default: // будет отрабатывать, если в каналы никто не пишет
+			fmt.Println("default")
 		}
 	}
 }
