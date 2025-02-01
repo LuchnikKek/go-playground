@@ -1,0 +1,15 @@
+definitions:
+  steps:
+    - step: &build-test
+        name: build and test
+        script:
+          - pytest -v
+        artifacts:
+          - src/**
+
+pipelines:
+  branches:
+    develop:
+      - step: *build-test
+    master:
+      - step: *build-test

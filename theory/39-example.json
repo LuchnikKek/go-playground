@@ -1,0 +1,8 @@
+{
+  "request": {
+    "user": "Admin",
+    "msg": "Sending a message",
+    "tags": "Main,Important,Test"
+  },
+  "user": "Admin"
+}
