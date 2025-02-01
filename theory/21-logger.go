@@ -10,8 +10,8 @@ import (
 )
 
 /* Вариант 1: Логгер в логируемой структуре */
-type MetricsRepository struct{
-    l *zap.Logger
+type MetricsRepository struct {
+	l *zap.Logger
 	// ещё поля
 }
 
@@ -21,7 +21,7 @@ type metricModel struct {
 
 func (mr *MetricsRepository) Save(m metricModel) error {
 	mr.l.Info("Savind metric to log", zap.String("id", m.id))
-	
+
 	if m.id == "" {
 		panic("No id")
 	}
@@ -30,10 +30,9 @@ func (mr *MetricsRepository) Save(m metricModel) error {
 
 func MainLoggers() {
 	logger, _ := zap.NewProduction()
-	defer logger.Sync()
-
+	defer func() { _ = logger.Sync() }()
 	rep := MetricsRepository{l: logger}
-	rep.Save(metricModel{id: "31231"})
+	_ = rep.Save(metricModel{id: "31231"})
 
 	// 1.2, приятный API
 	sugar := logger.Sugar()
@@ -44,21 +43,21 @@ func MainLoggers() {
 // Применим, если ко всему в пакете нужен одинаковый подход
 
 var (
-    logger         *zap.Logger
-    once           sync.Once
-    loggerFilePath = "log.json"
+	logger         *zap.Logger
+	once           sync.Once
+	loggerFilePath = "log.json"
 )
 
 func GetLogger() zap.Logger {
 	once.Do(func() {
 		file, err := os.Create(loggerFilePath)
 		if err != nil {
-			log.Fatalf(err.Error())
+			log.Fatalf("%s", err.Error())
 		}
 
 		defer func() {
 			if err = file.Close(); err != nil {
-				log.Fatalf(err.Error())
+				log.Fatalf("%s", err.Error())
 			}
 		}()
 
@@ -70,4 +69,3 @@ func GetLogger() zap.Logger {
 func configureLogger(file io.Writer, l *zap.Logger) {
 	// логика конфигурации логгера
 }
-

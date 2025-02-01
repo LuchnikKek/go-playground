@@ -17,13 +17,13 @@ func mainArrays() {
 	fmt.Println(arr1) // [0 0 0 0 0]
 
 	// объявление
-	var arr2 [3]int = [3]int{1,2,3} // излишняя форма
-	var arr3 = [3]int{1,2,3} // полная форма
-	arr4 := [3]int{1,2,3} // краткая форма
+	var arr2 [3]int = [3]int{1, 2, 3} // излишняя форма
+	var arr3 = [3]int{1, 2, 3}        // полная форма
+	arr4 := [3]int{1, 2, 3}           // краткая форма
 	fmt.Println(arr2, arr3, arr4)
 
 	// размер массива исходя из кол-ва элементов в объявлении
-	arr5 := [...]int{1,2}
+	arr5 := [...]int{1, 2}
 	_ = arr5
 	fmt.Println("Элементов в массиве:", len(arr5)) // 2
 }
@@ -33,13 +33,13 @@ func mainSlices() {
 	fmt.Println("========= Слайсы, срезы =========")
 
 	// Имеют переменную длину, элементы одного типа
-	someSlice := []int{10,20,30,40,50}
+	someSlice := []int{10, 20, 30, 40, 50}
 	newSlice := someSlice[2:4]
-	fmt.Println(newSlice) // 30, 40
+	fmt.Println(newSlice)      // 30, 40
 	fmt.Println(len(newSlice)) // 2 - количество элементов
 	fmt.Println(cap(newSlice)) // 3 - capacity, ёмкость, кол-во под которое выделена память
 
-	// Создание среза - make 
+	// Создание среза - make
 	newSlice = make([]int, 1, 2)
 	_printSliceInfo(newSlice) // len=1, cap=2, arr=[0]
 
@@ -68,7 +68,7 @@ func mainMaps() {
 	var m2 map[int]bool
 	fmt.Println(m2)
 
-	ages := map[string]uint16 {
+	ages := map[string]uint16{
 		"Гена": 30,
 		"Вася": 1,
 	}
@@ -95,8 +95,8 @@ func mainStructs() {
 	p1 := Point{x: 1, y: 2} // {1 2}
 	fmt.Println(p1)
 
-	p2 := Point{3, 4} // {3, 4}
-	p2 = Point{3, 5} // {3, 5}
+	// p2 := Point{3, 4} // {3, 4}
+	p2 := Point{3, 5} // {3, 5}
 	p2.x = 30
 	fmt.Println(p2) // {30, 5}
 }

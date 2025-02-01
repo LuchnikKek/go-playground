@@ -37,7 +37,9 @@ func sendData(ctx context.Context, num int) {
 func mainCtxWithTimeout() {
 	fmt.Println("Context with timeout")
 	parent := context.Background()
-	ctx, _ := context.WithTimeout(parent, 2*time.Second) // через сколько всё полетит в timer
+	ctx, cancel := context.WithTimeout(parent, 2*time.Second) // через сколько всё полетит в timer
+	defer cancel()
+
 	for i := range 4 {
 		go sendData(ctx, i)
 	}

@@ -1,6 +1,8 @@
 package theory
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func foo() {
 	panic("Паника в foo()")
@@ -15,4 +17,20 @@ func MainPanic() {
 	fmt.Println("Старт")
 	foo()
 	fmt.Println("Финиш") // не выведется
+}
+
+func MainPanicHandler() {
+	err := safeFoo()
+	if err != nil {
+		fmt.Printf("Обработана ошибка: %v\n", err.Error())
+	}
+}
+
+func safeFoo() (err error) {
+	defer func() {
+		if er := recover(); er != nil {
+			err = fmt.Errorf("%v", er)
+		}
+	}()
+	panic("Паника!!!")
 }

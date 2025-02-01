@@ -18,14 +18,14 @@ func mainFuncs() {
 	fmt.Println("======= Функции =========")
 
 	fmt.Println(_returnTyped() == _returnNamed()) // true
-	
+
 	fmt.Println(_variativeFuncArray(1, []int{2, 3, 4})) // [2 3 4 1]
-	fmt.Println(_variativeFunc(1, 2, 3, 4)) // [2 3 4 1]
-	fmt.Println(_variativeFunc(1, []int{2, 3, 4}...)) // распаковка слайса при передаче! [2 3 4 1]
+	fmt.Println(_variativeFunc(1, 2, 3, 4))             // [2 3 4 1]
+	fmt.Println(_variativeFunc(1, []int{2, 3, 4}...))   // распаковка слайса при передаче! [2 3 4 1]
 
 	newStr, err := _addSuffixWithErr("someStr")
 	fmt.Println(newStr) // someStrSuffix
-	fmt.Println(err) // <nil>
+	fmt.Println(err)    // <nil>
 }
 
 func _returnTyped() int {
@@ -70,7 +70,7 @@ func _recursionFactorial(n uint) uint {
 	if n <= 1 {
 		return 1
 	}
-	return n * _recursionFactorial(n - 1)
+	return n * _recursionFactorial(n-1)
 }
 
 func mainLambdas() {
@@ -111,27 +111,27 @@ func mainClosures() {
 
 func _counterClosure() func() {
 	counter := 0
-	return func () {
+	return func() {
 		counter += 1
 		fmt.Println("Печатаю", counter)
 	}
 }
 
 func _parametrizedSumClosure(start int) func(int) int {
-	return func (summand int) int {
+	return func(summand int) int {
 		start += summand
 		return start
 	}
 }
 
-func mainDefer () {
+func mainDefer() {
 	// Defer выполняется при закрытии функции
 	fmt.Println("=========== Отложенный вызов (Defer) ==============")
 	// если defer несколько - пойдут с конца
 	// при передаче ptr - значение актуальное
 	// при передаче значения - значение не обновляется
 	i := 14
-	defer _teardownValue(i) // закроется вторым
+	defer _teardownValue(i)    // закроется вторым
 	defer _teardownPointer(&i) // закроется первым
 	i++
 	fmt.Println("Still working. i is", i)
@@ -143,15 +143,14 @@ func mainDefer () {
 	defer func(x int) {
 		fmt.Println(x)
 	}(num)
-	num = 20
+	num = 20 // nolint:ineffassign
 	// 0 (num уже вычислен для defer)
 }
 
-func _teardownValue (i int) {
+func _teardownValue(i int) {
 	fmt.Println("value closed, i is", i)
 }
 
-func _teardownPointer (i *int) {
+func _teardownPointer(i *int) {
 	fmt.Println("pointer closed, i is", *i)
 }
-

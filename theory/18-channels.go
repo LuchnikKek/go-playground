@@ -9,8 +9,7 @@ func MainChannels() {
 
 func unbufferedChannel() {
 	// небуферизированный канал (нет ёмкости)
-	var ch chan int // объявление канала
-	ch = make(chan int)
+	var ch chan int = make(chan int)
 
 	// ch <- 100 - deadlock, канал ещё никто не читает
 
@@ -28,8 +27,7 @@ func _readChan(ch chan int) {
 }
 
 func bufferedChannel() {
-	var ch chan int        // объявление канала
-	ch = make(chan int, 1) // создание буферизированного канала (защита от deadlock)
+	var ch chan int = make(chan int, 1) // создание буферизированного канала (защита от deadlock)
 
 	ch <- 100
 
