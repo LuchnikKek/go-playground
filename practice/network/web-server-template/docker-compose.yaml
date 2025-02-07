@@ -1,0 +1,8 @@
+services:
+  db:
+    image: postgres:17.2
+    environment:
+      POSTGRES_PASSWORD: 123qwe
+    ports:
+      - "5432:5432"
+    restart: always
