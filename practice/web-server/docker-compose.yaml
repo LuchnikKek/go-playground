@@ -1,0 +1,14 @@
+services:
+  db:
+    image: postgres:17.2
+    environment:
+      POSTGRES_PASSWORD: 123qwe
+    volumes:
+      - ./migrations/00-initial.sql:/docker-entrypoint-initdb.d/00-initial.sql
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: always
+
+volumes:
+  db_data:
