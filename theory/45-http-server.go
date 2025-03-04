@@ -109,6 +109,7 @@ func authPage(w http.ResponseWriter, r *http.Request) {
 }
 
 func MainHttpServer() {
+	// curl -X POST http://localhost:8080/\?id\=12345\&name\=John%20Doe\&filter\=town\&filter\=country -H "Content-Type: text/plain" --data "Hello" -i
 	var helloPage HelloHandler
 
 	mux := http.NewServeMux()
