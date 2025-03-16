@@ -3,5 +3,5 @@ package main
 import "playground/theory"
 
 func main() {
-	theory.MainRelationship()
+	theory.MainChiServerMw()
 }
