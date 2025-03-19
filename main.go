@@ -1,7 +1,7 @@
 package main
 
-import "playground/theory"
+import practice "playground/practice/snippets"
 
 func main() {
-	theory.MainStartupFlagsHelp()
+	practice.MainConfigTimeDurExample()
 }
