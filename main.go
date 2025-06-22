@@ -1,7 +1,9 @@
 package main
 
-import practice "playground/practice/snippets"
+import (
+	"playground/theory"
+)
 
 func main() {
-	practice.MainConfigTimeDurExample()
+	theory.MainZapMiddleware()
 }
